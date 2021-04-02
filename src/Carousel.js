@@ -102,8 +102,7 @@ export default function CarouselTemp({ children, visibleSlides, offset = 0, scro
             ((state.previousMousePosition ? state.previousMousePosition : state.mousePosition.startingPosition) -
               state.mousePosition.currentPosition)
         )
-        console.log(newXPositions, state.slide.xPositions)
-        console.log("UPDATE")
+        // console.log("DRAG NEW POSITIONS: ", newXPositions)
         dispatch({
           type: "UPDATE DRAG POSITION",
           data: { xPositions: newXPositions, previousMousePosition: state.mousePosition.currentPosition },

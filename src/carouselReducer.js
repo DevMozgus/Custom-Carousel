@@ -15,7 +15,6 @@ function moveRight(state, mousePosition) {
   xPositions.unshift(xPositions.pop())
 
   if (mousePosition) {
-    console.log("test")
     xPositions = state.slide.xPositionsInitial.slice()
     xPositions.unshift(xPositions.pop())
 
@@ -61,7 +60,7 @@ function moveLeft(state, mousePosition) {
 
     const currentDrag = mousePosition.startingPosition - mousePosition.currentPosition
     const xPositionReset = tempXPositions.map((position) => position - currentDrag)
-    console.log("DONE: ", xPositions, xPositionReset)
+    console.log("TRANSITION NEW POSITIONS: ", xPositionReset, currentDrag)
     return {
       ...state,
       slide: {
@@ -125,7 +124,7 @@ function determineBounceDirection(state) {
       },
     }
   } else {
-    const direction = nextSlideDistance < 0 ? "right" : "left"
+    const direction = isMovingRight ? "right" : "left"
     console.log("NEXT", direction)
     return {
       ...state,
