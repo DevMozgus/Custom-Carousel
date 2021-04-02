@@ -40,17 +40,32 @@ div.absolute {
   }
 }
 
-.buttonBack {
-  right: 0px;
-  top: 50px;
+.buttonContainer {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
 }
 
-.buttonNext {
-  top: 50px;
+.buttonBack {
+  right: 0px;
 }
 
 .buttonBack,
 .buttonNext {
+  width: 100px;
+  padding: 0;
   position: absolute;
-  z-index: 50;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: none;
+  svg {
+    stroke: black;
+  }
+  height: 100%;
+  &:hover {
+    cursor: pointer;
+  }
 }

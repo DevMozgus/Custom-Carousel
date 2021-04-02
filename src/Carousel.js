@@ -142,26 +142,30 @@ export default function CarouselTemp({ children, visibleSlides, offset = 0, scro
     }
   }
 
-  // function handleTouchMove(e) {
-  //   const touchDown = touchPosition
+  function handleTouchMove(e) {
+    const touchDown = touchPosition
 
-  //   if (touchDown === null) {
-  //     return
-  //   }
+    if (touchDown === null) {
+      return
+    }
 
-  //   const currentTouch = e.touches[0].clientX
-  //   const diff = touchDown - currentTouch
+    const currentTouch = e.touches[0].clientX
+    const diff = touchDown - currentTouch
 
-  //   if (diff > 5) {
-  //     moveLeft()
-  //   }
+    if (diff > 5) {
+      dispatch({
+        type: "SLIDE LEFT",
+      })
+    }
 
-  //   if (diff < -5) {
-  //     moveRight()
-  //   }
+    if (diff < -5) {
+      dispatch({
+        type: "SLIDE RIGHT",
+      })
+    }
 
-  //   setTouchPosition(null)
-  // }
+    setTouchPosition(null)
+  }
 
   function determineStyle(index) {
     const firstItemPosition = state.slide.xPositions.reduce((acc, curr) => (acc > curr ? curr : acc))
@@ -210,7 +214,7 @@ export default function CarouselTemp({ children, visibleSlides, offset = 0, scro
       : offset / 2 + (state.imageSizes.imageWidth + offset)
 
   return (
-    <>
+    <div className="relative">
       <div
         onTouchStart={handleTouchStart}
         className="Carousel-Container"
@@ -234,17 +238,7 @@ export default function CarouselTemp({ children, visibleSlides, offset = 0, scro
           })}
         </div>
       </div>
-      <div>
-        <button
-          onClick={() => {
-            dispatch({
-              type: "SLIDE LEFT",
-            })
-          }}
-          className="buttonBack"
-        >
-          next
-        </button>
+      <div className="buttonContainer">
         <button
           onClick={() => {
             dispatch({
@@ -253,9 +247,47 @@ export default function CarouselTemp({ children, visibleSlides, offset = 0, scro
           }}
           className="buttonNext"
         >
-          back
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-chevron-left"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#9e9e9e"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <polyline points="15 6 9 12 15 18" />
+          </svg>
+        </button>
+        <button
+          onClick={() => {
+            dispatch({
+              type: "SLIDE LEFT",
+            })
+          }}
+          className="buttonBack"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-chevron-right"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#9e9e9e"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <polyline points="9 6 15 12 9 18" />
+          </svg>
         </button>
       </div>
-    </>
+    </div>
   )
 }
