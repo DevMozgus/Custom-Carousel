@@ -1,14 +1,3 @@
-function shiftArray(array, direction) {
-  let newArray = array.slice()
-  if (direction === "right") {
-    array.unshift(array.pop())
-    return array
-  } else if (direction === "left") {
-    array.push(array.shift())
-    return array
-  }
-}
-
 function moveRight(state, mousePosition) {
   console.log("START TRANSITION: ", state.slide.xPositions)
   let xPositions = state.slide.xPositions.slice()

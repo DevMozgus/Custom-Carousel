@@ -9,8 +9,10 @@ function calculateXPositions(items, currentImageWidth, offset = 0) {
   return items.map((_, index) => (currentImageWidth + offset) * index)
 }
 
-export default function CarouselTemp({ children, visibleSlides, offset = 0, scrollInterval = 0 }) {
+export default function CarouselTemp({ children, defaultVisibleSlides, defaultOffset = 0, scrollInterval = 0 }) {
   const slideRef = useRef(null)
+  const visibleSlides = window.innerWidth > 768 ? defaultVisibleSlides : 1
+  const offset = window.innerWidth > 768 ? defaultOffset : 0
 
   const initialImageWidth = calculateImageWidth(window.innerWidth, visibleSlides, offset)
   const initialCarouselState = {
@@ -109,6 +111,7 @@ export default function CarouselTemp({ children, visibleSlides, offset = 0, scro
         })
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.mousePosition])
 
   function handleTouchStart(e) {
@@ -216,6 +219,7 @@ export default function CarouselTemp({ children, visibleSlides, offset = 0, scro
   return (
     <div className="relative">
       <div
+        onTouchMove={handleTouchMove}
         onTouchStart={handleTouchStart}
         className="Carousel-Container"
         style={{ height: `${state.imageSizes.largestImage}px` }}

@@ -1,5 +1,3 @@
-import { useReducer, useEffect, useState } from "react"
-import { useSwipeable, SwipeableHandlers, EventData } from "react-swipeable"
 import CarouselTemp from "./Carousel"
 
 import "./App.scss"
@@ -7,9 +5,9 @@ import "./App.scss"
 function App() {
   return (
     <>
-      <CarouselTemp visibleSlides={3} offset={150}>
+      <CarouselTemp defaultVisibleSlides={3} defaultOffset={150}>
         {images.map((img, index) => (
-          <img key={index} src={img.image} />
+          <img key={index} src={img.image} alt="example" />
         ))}
       </CarouselTemp>
     </>
