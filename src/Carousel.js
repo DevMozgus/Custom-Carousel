@@ -238,56 +238,54 @@ export default function CarouselTemp({ children, visibleSlides, offset = 0, scro
           })}
         </div>
       </div>
-      <div className="buttonContainer">
-        <button
-          onClick={() => {
-            dispatch({
-              type: "SLIDE RIGHT",
-            })
-          }}
-          className="buttonNext"
+      <button
+        onClick={() => {
+          dispatch({
+            type: "SLIDE RIGHT",
+          })
+        }}
+        className="buttonNext"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-chevron-left"
+          width="44"
+          height="44"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="#9e9e9e"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-chevron-left"
-            width="44"
-            height="44"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="#9e9e9e"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <polyline points="15 6 9 12 15 18" />
-          </svg>
-        </button>
-        <button
-          onClick={() => {
-            dispatch({
-              type: "SLIDE LEFT",
-            })
-          }}
-          className="buttonBack"
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <polyline points="15 6 9 12 15 18" />
+        </svg>
+      </button>
+      <button
+        onClick={() => {
+          dispatch({
+            type: "SLIDE LEFT",
+          })
+        }}
+        className="buttonBack"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-chevron-right"
+          width="44"
+          height="44"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="#9e9e9e"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-chevron-right"
-            width="44"
-            height="44"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="#9e9e9e"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <polyline points="9 6 15 12 9 18" />
-          </svg>
-        </button>
-      </div>
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <polyline points="9 6 15 12 9 18" />
+        </svg>
+      </button>
     </div>
   )
 }
