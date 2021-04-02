@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+div.Carousel-Container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+div.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.Slide-Container,
+.Slide-Container > div {
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.Slides {
+  //   left: 100%;
+}
+
+.Slider-Content {
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}
+
+.buttonBack {
+  right: 0px;
+  top: 50px;
+}
+
+.buttonNext {
+  top: 50px;
+}
+
+.buttonBack,
+.buttonNext {
+  position: absolute;
+  z-index: 50;
+}
