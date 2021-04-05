@@ -75,6 +75,7 @@ function moveLeft(state, mousePosition) {
 
 function determineBounceDirection(state) {
   const previousSlidePosition = state.slide.xPositionsInitial
+  console.log(previousSlidePosition)
 
   const isMovingRight = previousSlidePosition[0] - state.slide.xPositions[0] > 0
 
@@ -97,7 +98,7 @@ function determineBounceDirection(state) {
     Math.abs(nextSlidePosition[1] - state.slide.xPositions[1]) % (state.imageSizes.imageWidth + state.imageSizes.offset)
 
   console.log("PREVIOUS DISTANCE: ", Math.abs(previousSlideDistance), "NEXT DISTANCE: ", nextSlideDistance)
-
+  console.log(state.imageSizes)
   if (Math.abs(previousSlideDistance === 0)) {
     return state
   } else if (Math.abs(previousSlideDistance) < nextSlideDistance) {

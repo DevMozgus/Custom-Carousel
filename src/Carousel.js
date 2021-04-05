@@ -42,6 +42,8 @@ export default function CarouselTemp({ children, defaultVisibleSlides, defaultOf
 
   useEffect(() => {
     function handleResize() {
+      const zoom = ((window.outerWidth - 10) / window.innerWidth) * 100
+      console.log(zoom)
       const currentImageWidth = calculateImageWidth(window.innerWidth, visibleSlides, offset)
 
       const newImageHeights = [...slideRef.current.children].map(
@@ -52,9 +54,13 @@ export default function CarouselTemp({ children, defaultVisibleSlides, defaultOf
         type: "UPDATE SIZES",
         data: {
           slide: {
+            ...state.slide,
             xPositions: calculateXPositions(children, currentImageWidth, offset),
+
+            xPositionsInitial: calculateXPositions(children, currentImageWidth, offset),
           },
           imageSizes: {
+            ...state.imageSizes,
             imageWidth: currentImageWidth,
             imageHeights: newImageHeights,
             largestImage: getLargestImage(newImageHeights),
@@ -104,7 +110,10 @@ export default function CarouselTemp({ children, defaultVisibleSlides, defaultOf
             ((state.previousMousePosition ? state.previousMousePosition : state.mousePosition.startingPosition) -
               state.mousePosition.currentPosition)
         )
-        // console.log("DRAG NEW POSITIONS: ", newXPositions)
+        console.log(state.previousMousePosition, state.mousePosition.startingPosition)
+
+        console.log("DRAG NEW POSITIONS: ", newXPositions)
+        console.log("OLD POSITIONS: ", state.slide.xPositions)
         dispatch({
           type: "UPDATE DRAG POSITION",
           data: { xPositions: newXPositions, previousMousePosition: state.mousePosition.currentPosition },
