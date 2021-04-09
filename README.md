@@ -10,9 +10,12 @@ Live demo can be found [here](https://custom-react-carousel.netlify.app/).
 - Slide div sets the carousel height, it completely breaks if there's multiple children/ more complex width settings on the child
 - Window zoom can cause funky behaviour (causes mouseXPosition to increase xTravelSize, previousX - currentX = stinkyX)
 - On resize/zoom the carousel height sometimes doesn't adjust to the largest image
+- Item 3 in image array has no previous/next distance for "DRAG ENDED"
 
 ## To Do
 
+- Change bounce to transition on smaller drag distances
+- Change navigation buttons size for mobile
 - Refactor reducer/carousel component
 - Modify for video playback
 - Change to ts

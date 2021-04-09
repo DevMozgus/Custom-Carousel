@@ -42,8 +42,6 @@ export default function CarouselTemp({ children, defaultVisibleSlides, defaultOf
 
   useEffect(() => {
     function handleResize() {
-      const zoom = ((window.outerWidth - 10) / window.innerWidth) * 100
-      console.log(zoom)
       const currentImageWidth = calculateImageWidth(window.innerWidth, visibleSlides, offset)
 
       const newImageHeights = [...slideRef.current.children].map(
