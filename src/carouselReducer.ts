@@ -1,18 +1,18 @@
-function moveRight(state, mousePosition) {
-  console.log("START TRANSITION: ", state.slide.xPositions)
-  let xPositions = state.slide.xPositions.slice()
+import { Slide, SlideSizes, DragValues, State } from "./types"
+
+function moveRight(state: State): State {
+  let xPositions: any = [...state.slide.xPositions]
   xPositions.unshift(xPositions.pop())
 
-  if (mousePosition) {
+  if (state.dragValues !== null && state.dragValues.startingPosition !== 0) {
     xPositions = state.slide.xPositionsInitial.slice()
     xPositions.unshift(xPositions.pop())
 
-    const tempXPositions = state.slide.xPositions.slice()
+    const tempXPositions: any = state.slide.xPositions.slice()
     tempXPositions.unshift(tempXPositions.pop())
 
-    const currentDrag = mousePosition.startingPosition - mousePosition.currentPosition
+    const currentDrag = state.dragValues.startingPosition - state.dragValues.currentPosition
     const xPositionReset = tempXPositions.map((position) => position - currentDrag)
-    console.log("DONE: ", xPositions, xPositionReset)
     return {
       ...state,
       slide: {
@@ -23,7 +23,6 @@ function moveRight(state, mousePosition) {
       },
     }
   } else {
-    console.log("DONE: ", xPositions)
     return {
       ...state,
       slide: {
@@ -36,20 +35,18 @@ function moveRight(state, mousePosition) {
   }
 }
 
-function moveLeft(state, mousePosition) {
-  console.log("START TRANSITION: ", state.slide.xPositions)
-  let xPositions = state.slide.xPositions.slice()
+function moveLeft(state: any): State {
+  let xPositions = [...state.slide.xPositions]
   xPositions.push(xPositions.shift())
-  if (mousePosition) {
+  if (state.dragValues !== null && state.dragValues.startingPosition !== 0) {
     xPositions = state.slide.xPositionsInitial.slice()
     xPositions.push(xPositions.shift())
 
     const tempXPositions = state.slide.xPositions.slice()
     tempXPositions.push(tempXPositions.shift())
 
-    const currentDrag = mousePosition.startingPosition - mousePosition.currentPosition
+    const currentDrag = state.dragValues.startingPosition - state.dragValues.currentPosition
     const xPositionReset = tempXPositions.map((position) => position - currentDrag)
-    console.log("TRANSITION NEW POSITIONS: ", xPositionReset, currentDrag)
     return {
       ...state,
       slide: {
@@ -60,7 +57,6 @@ function moveLeft(state, mousePosition) {
       },
     }
   } else {
-    console.log("DONE: ", xPositions)
     return {
       ...state,
       slide: {
@@ -73,37 +69,30 @@ function moveLeft(state, mousePosition) {
   }
 }
 
-function determineBounceDirection(state) {
+function determineBounceDirection(state: any): State {
   const previousSlidePosition = state.slide.xPositionsInitial
-  console.log(previousSlidePosition)
+  console.log(state.dragValues)
 
   const isMovingRight = previousSlidePosition[0] - state.slide.xPositions[0] > 0
 
   let nextSlidePosition
   if (isMovingRight) {
     // moving right
-    console.log("MOVING RIGHT")
     nextSlidePosition = state.slide.xPositionsInitial.slice()
     nextSlidePosition.unshift(nextSlidePosition.pop())
   } else {
-    console.log("MOVING LEFT")
     // moving left
     nextSlidePosition = state.slide.xPositionsInitial.slice()
     nextSlidePosition.push(nextSlidePosition.shift())
   }
 
-  const previousSlideDistance =
-    (previousSlidePosition[1] - state.slide.xPositions[1]) % (state.imageSizes.imageWidth + state.imageSizes.offset)
-  const nextSlideDistance =
-    Math.abs(nextSlidePosition[1] - state.slide.xPositions[1]) % (state.imageSizes.imageWidth + state.imageSizes.offset)
+  const previousSlideDistance = (previousSlidePosition[1] - state.slide.xPositions[1]) % state.slideSizes.imageWidth
+  const nextSlideDistance = Math.abs(nextSlidePosition[1] - state.slide.xPositions[1]) % state.slideSizes.slideWidth
 
-  console.log("PREVIOUS DISTANCE: ", Math.abs(previousSlideDistance), "NEXT DISTANCE: ", nextSlideDistance)
-  console.log(state.imageSizes)
-  if (Math.abs(previousSlideDistance === 0)) {
+  if (Math.abs(previousSlideDistance) === 0) {
     return state
   } else if (Math.abs(previousSlideDistance) < nextSlideDistance) {
     const direction = previousSlideDistance < 0 ? "right" : "left"
-    console.log("PREVIOUS", direction)
     return {
       ...state,
       slide: {
@@ -115,7 +104,6 @@ function determineBounceDirection(state) {
     }
   } else {
     const direction = isMovingRight ? "right" : "left"
-    console.log("NEXT", direction)
     return {
       ...state,
       slide: {
@@ -131,22 +119,22 @@ function determineBounceDirection(state) {
 export function carouselReducer(state, action) {
   switch (action.type) {
     case "DRAG STARTED":
-      return { ...state, mousePosition: { ...state.mousePosition, startingPosition: action.data } }
+      return { ...state, dragValues: { ...state.dragValues, startingPosition: action.data } }
     case "DRAG ENDED":
-      return { ...state, mousePosition: action.data, previousMousePosition: null }
+      return { ...state, dragValues: action.data, previousMousePosition: null }
     case "CURRENTLY DRAGGING":
-      return { ...state, mousePosition: { ...state.mousePosition, currentPosition: action.data } }
+      return { ...state, dragValues: { ...state.dragValues, currentPosition: action.data } }
     case "SLIDE LEFT":
       return moveLeft(state)
     case "DRAG LEFT":
-      return moveLeft(state, state.mousePosition)
+      return moveLeft(state)
     case "SLIDE RIGHT":
       return moveRight(state)
     case "DRAG RIGHT":
-      return moveRight(state, state.mousePosition)
+      return moveRight(state)
     case "SET TRANSITION NUM":
       const transitionNumber = action.data
-      return { ...state, mousePosition: { ...state.mousePosition, transitionNumber } }
+      return { ...state, dragValues: { ...state.dragValues, transitionNumber } }
     case "TRANSITION NUM DONE":
       return { ...state, slide: { ...state.slide, active: false } }
     case "UPDATE DRAG POSITION":
