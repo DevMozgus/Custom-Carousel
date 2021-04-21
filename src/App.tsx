@@ -1,11 +1,11 @@
-import CarouselTemp from "./Carousel"
+import Carousel from "./Carousel"
 
 import "./App.scss"
 
 export default function App() {
   return (
     <div>
-      <CarouselTemp fullscreen={false} images={images} widthToHeightRatio={1.5} />
+      <Carousel fullscreen={false} images={images} widthToHeightRatio={1.5} />
     </div>
   )
 }
