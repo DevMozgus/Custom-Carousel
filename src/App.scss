@@ -3,54 +3,50 @@ body {
   padding: 0;
 }
 
-div.Carousel-Container {
-  width: 100%;
-  height: auto;
+.Carousel {
   overflow: hidden;
-  display: flex;
-  align-items: center;
-}
-div.absolute {
-  position: absolute;
-}
-
-.relative {
+  width: 100%;
   position: relative;
 }
 
-.absolute {
-  position: absolute;
-}
-
-.Slide-Container,
-.Slide-Container > div {
-  height: auto;
+.Carousel-Container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   display: flex;
   align-items: center;
 }
 
 .Slides {
-  //   left: 100%;
-}
-
-.Slider-Content {
+  display: flex;
+  height: 100%;
   width: 100%;
-  img {
-    width: 100%;
-  }
 }
 
-.buttonBack {
-  right: 0px;
+.Slide-Container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  pointer-events: none;
+  img {
+    pointer-events: none;
+    width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    padding: 0 30px;
+  }
 }
 
 .buttonBack,
 .buttonNext {
-  width: 100px;
+  width: 60px;
+  height: 100%;
+  display: flex;
+  align-items: center;
   padding: 0;
   top: 0;
   position: absolute;
-  height: 100%;
   background-color: rgba(0, 0, 0, 0.1);
   border: none;
   svg {
@@ -60,4 +56,16 @@ div.absolute {
   &:hover {
     cursor: pointer;
   }
+  @media only screen and (min-width: 768px) {
+    width: 100px;
+  }
+}
+
+.buttonBack {
+  right: 0px;
+  justify-content: flex-end;
+}
+
+.buttonNext {
+  justify-content: flex-start;
 }
