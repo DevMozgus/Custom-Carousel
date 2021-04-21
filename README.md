@@ -10,8 +10,8 @@ Live demo can be found [here](https://custom-react-carousel.netlify.app/).
 
 ## To Do
 
-- Change navigation buttons size for mobile
 - Modify for video playback
+- Make bounce threshhold smaller for moving to next slide
 
 ## Installation
 

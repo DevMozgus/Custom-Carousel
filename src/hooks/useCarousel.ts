@@ -23,6 +23,7 @@ export interface SlideValues {
 
 export default function useCarousel(arrayLength: number, slideWidth: number) {
   const [handleDrag, dragValues] = useDrag(dragEnded)
+
   const initialXPositions = calculateXPositions(arrayLength, slideWidth)
   const initialSlidesState: SlideValues = {
     direction: "",

@@ -24,9 +24,9 @@ export function useDrag(callback: () => void): [(event: any) => void, DragValues
       setCurrentPosition(0)
       setPreviousPosition(0)
     } else if (startingPosition !== 0) {
-      const dragPosition = dragType === "mousemove" ? event.clientX : event.touches[0].clientX
+      const newDragPosition = dragType === "mousemove" ? event.clientX : event.touches[0].clientX
       setPreviousPosition(currentPosition)
-      setCurrentPosition(dragPosition)
+      setCurrentPosition(newDragPosition)
     }
   }
 

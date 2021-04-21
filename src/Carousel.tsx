@@ -8,8 +8,7 @@ export interface CarouselProps {
 }
 
 export default function CarouselTemp({ fullscreen, images, widthToHeightRatio }: CarouselProps) {
-  // changing visible slides from 3 to anything else may break current carouselCentering style
-  const visibleSlides: number = 3
+  const visibleSlides = window && window.innerWidth > 768 ? 3 : 1
   const [slideWidth, slideHeight] = useSlideDimensions(visibleSlides, widthToHeightRatio)
   const [move, slide] = useCarousel(images.length, slideWidth)
 
@@ -41,13 +40,12 @@ export default function CarouselTemp({ fullscreen, images, widthToHeightRatio }:
   const carouselCentering = visibleSlides !== 1 ? slideWidth * (visibleSlides + 1) - slideWidth / 2 : slideWidth
 
   return (
-    <div className="relative" style={{ overflow: "hidden" }}>
+    <div className="Carousel" style={{ height: fullscreen ? "100vh" : `${slideHeight}px` }}>
       <div
         onTouchMove={move.handleDrag}
         onTouchStart={move.handleDrag}
         onTouchEnd={move.handleDrag}
         className="Carousel-Container"
-        style={{ height: `${fullscreen ? "100vh" : slideHeight}px` }}
         onMouseDown={move.handleDrag}
         onMouseMove={move.handleDrag}
         onMouseUp={move.handleDrag}
@@ -58,19 +56,14 @@ export default function CarouselTemp({ fullscreen, images, widthToHeightRatio }:
             return (
               <div
                 key={index}
-                className="Slide-Container absolute"
-                style={{ width: `${slideWidth}px`, left: `${carouselCentering}px` }}
+                className="Slide-Container"
+                style={{
+                  ...animationStyle,
+                  width: `${slideWidth}px`,
+                  left: `${carouselCentering}px`,
+                }}
               >
-                <div
-                  className="Slider-Content"
-                  style={{
-                    ...animationStyle,
-                    width: `${slideWidth}px`,
-                    height: `${fullscreen ? "100vh" : slideHeight}`,
-                  }}
-                >
-                  <img src={item} alt="example" />
-                </div>
+                <img src={item} alt="example" />
               </div>
             )
           })}

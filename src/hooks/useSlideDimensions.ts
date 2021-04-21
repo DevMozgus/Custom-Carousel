@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react"
 
 function calculateSlideWidth(visibleSlides: number): number {
-  return window.innerWidth / visibleSlides
+  const windowLoaded = typeof window !== "undefined" && window.innerWidth
+  if (windowLoaded && window.innerWidth < 768) {
+    return window.innerWidth
+  } else {
+    return window.innerWidth / visibleSlides
+  }
 }
 
 function calculateSlideHeight(visibleSlides: number, widthToHeightRatio: number): number {

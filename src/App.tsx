@@ -4,7 +4,10 @@ import "./App.scss"
 
 export default function App() {
   return (
-    <div>
+    <div style={{ height: "200vh", width: "100%" }}>
+      <Carousel fullscreen={true} images={images} widthToHeightRatio={1.5} />
+      <h1 style={{ width: "100%", textAlign: "center" }}>Much Wow</h1>
+      <h2 style={{ width: "100%", textAlign: "center" }}>Such Carousel</h2>
       <Carousel fullscreen={false} images={images} widthToHeightRatio={1.5} />
     </div>
   )
